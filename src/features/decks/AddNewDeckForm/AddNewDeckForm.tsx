@@ -1,11 +1,15 @@
-import s from './AddNewPostForm.module.css'
-import { useForm } from 'react-hook-form'
+import s from './AddNewPostForm.module.css';
+import { useForm } from 'react-hook-form';
+import { addDecksTC } from '../../../../src/features/decks/decks-thunks.ts';
+import { useAppDispatch } from '../../../../src/app/store.ts';
 
 type FormValues = {
-  name: string
-}
+  name: string;
+};
 
 export const AddNewDeckForm = () => {
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -14,11 +18,11 @@ export const AddNewDeckForm = () => {
     defaultValues: {
       name: '',
     },
-  })
+  });
 
   const onSubmit = (data: FormValues) => {
-    console.log(data)
-  }
+    dispatch(addDecksTC(data));
+  };
 
   return (
     <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
@@ -38,5 +42,5 @@ export const AddNewDeckForm = () => {
       </label>
       <button type="submit">Add new deck</button>
     </form>
-  )
-}
+  );
+};

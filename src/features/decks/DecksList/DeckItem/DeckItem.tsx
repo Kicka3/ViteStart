@@ -1,13 +1,16 @@
-import s from './DeckItem.module.css'
+import s from './DeckItem.module.css';
+import { Deck } from '../../../../../src/features/decks/decks-api.ts';
+import { useAppDispatch } from '../../../../../src/app/store.ts';
 
 type DeckProps = {
-  deck: any // todo: fix
-}
+  deck: Deck;
+};
 
-const TEST_ACC_NAME = 'kukus'
+const TEST_ACC_NAME = 'kukus';
 
 export const DeckItem = ({ deck }: DeckProps) => {
-  const isTestingDeck = deck.author.name === TEST_ACC_NAME
+  const dispatch = useAppDispatch();
+  const isTestingDeck = deck.author.name === TEST_ACC_NAME;
 
   return (
     <li className={s.item}>
@@ -21,6 +24,7 @@ export const DeckItem = ({ deck }: DeckProps) => {
       <p className={s.characteristic}>
         <b>Created:</b> {new Date(deck.created).toLocaleString('ru-Ru')}
       </p>
+
       <p className={s.characteristic}>
         <b>Updated:</b> {new Date(deck.updated).toLocaleString('ru-Ru')}
       </p>
@@ -32,5 +36,5 @@ export const DeckItem = ({ deck }: DeckProps) => {
         </div>
       )}
     </li>
-  )
-}
+  );
+};
